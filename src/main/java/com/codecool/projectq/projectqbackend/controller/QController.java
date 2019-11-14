@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import sun.security.krb5.internal.Ticket;
+import com.codecool.projectq.projectqbackend.model.Ticket;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 
 @CrossOrigin
@@ -23,16 +22,13 @@ public class QController {
     }
 
     @PostMapping("/requestnumber")
-    public int requestNumber(@RequestBody HashMap<String,String> map){
+    public Ticket requestNumber(@RequestBody HashMap<String,String> map){
         String time = map.get("time");
         System.out.println("got it,time:  " + time);
         long timeOfRegistration = Long.parseLong(time);
-        Timestamp timestampOfRegistration = new Timestamp(timeOfRegistration);
-        System.out.println("timestamp: " + timestampOfRegistration);
-
-        Ticket ticket = office.addTicket(timestampOfRegistration);
-
-        return 123;
+        Ticket ticket = office.addTicket(timeOfRegistration);
+        return ticket;
     }
+
 
 }
