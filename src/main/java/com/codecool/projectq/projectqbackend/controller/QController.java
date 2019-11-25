@@ -29,6 +29,4 @@ public class QController {
         Ticket ticket = office.addTicket(timeOfRegistration);
         return ticket;
     }
-
-
 }
