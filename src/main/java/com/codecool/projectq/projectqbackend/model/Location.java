@@ -8,6 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Location {
+
+    private long id;
+
     private int latitude;
     private int longitude;
 }

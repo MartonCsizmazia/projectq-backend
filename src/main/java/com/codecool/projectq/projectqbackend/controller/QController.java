@@ -1,6 +1,6 @@
 package com.codecool.projectq.projectqbackend.controller;
 
-import com.codecool.projectq.projectqbackend.service.Office;
+import com.codecool.projectq.projectqbackend.model.Office;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +26,8 @@ public class QController {
         String time = map.get("time");
         System.out.println("got it,time:  " + time);
         long timeOfRegistration = Long.parseLong(time);
-        Ticket ticket = office.addTicket(timeOfRegistration);
-        return ticket;
+        //Ticket ticket = office.addTicket(timeOfRegistration);
+        //return ticket;
+        return null;
     }
 }

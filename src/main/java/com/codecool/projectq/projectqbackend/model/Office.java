@@ -1,14 +1,25 @@
-package com.codecool.projectq.projectqbackend.service;
+package com.codecool.projectq.projectqbackend.model;
 
 import com.codecool.projectq.projectqbackend.model.Ticket;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 @Component
 public class Office {
 
+    private long id;
+    private String name;
+    private Location location;
+    private List<Station> stations = new ArrayList<>();
+    private Queue<Ticket> tickets;
+
+
+
+    /*
     private static final long WAITTIME = 10000;
 
     private int counter = 0;
@@ -28,4 +39,6 @@ public class Office {
     private long estimateTimeOfApointment(long time){
         return time+WAITTIME*queue.size();
     }
+
+     */
 }

@@ -6,8 +6,9 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class Ticket {
-    private String id;
+    private long id;
     private long timeOfRegistration;
     private int beforeMe;
     private long estimatedTimeOfAppointment;
+    private CaseType caseType;
 }
