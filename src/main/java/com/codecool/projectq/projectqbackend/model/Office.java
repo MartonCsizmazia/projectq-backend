@@ -21,6 +21,8 @@ public class Office {
     @Id
     @GeneratedValue
     private long id;
+
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})

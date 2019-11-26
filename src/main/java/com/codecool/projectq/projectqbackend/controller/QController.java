@@ -13,14 +13,17 @@ import java.util.HashMap;
 @CrossOrigin
 @RestController
 public class QController {
-    /*
-    private final Office office;
 
+    private Office office;
+    /*
     @Autowired
     public QController(Office office) {
         this.office = office;
     }
+     */
 
+
+    /*
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
         String time = map.get("time");
@@ -30,6 +33,8 @@ public class QController {
         //return ticket;
         return null;
     }
-
      */
+
+
+
 }

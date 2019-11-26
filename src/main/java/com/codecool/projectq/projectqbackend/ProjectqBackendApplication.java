@@ -17,7 +17,6 @@ public class ProjectqBackendApplication {
     @Autowired
     private OfficeRepository officeRepository;
 
-
     public static void main(String[] args) {
         SpringApplication.run(ProjectqBackendApplication.class, args);
     }
