@@ -23,7 +23,7 @@ public class Office {
     private long id;
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Location location;
 
     @Singular

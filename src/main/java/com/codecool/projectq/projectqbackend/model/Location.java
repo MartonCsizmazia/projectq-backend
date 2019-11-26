@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,9 @@ public class Location {
     @GeneratedValue
     private long id;
 
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
+
+    @OneToOne(mappedBy = "location")
+    private Office office;
 }

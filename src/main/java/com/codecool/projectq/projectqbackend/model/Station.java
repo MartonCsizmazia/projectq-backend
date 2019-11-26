@@ -20,14 +20,14 @@ public class Station {
     @GeneratedValue
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Officer officer;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection
     @Singular
     @EqualsAndHashCode.Exclude
-    private List<CaseType> cases;
+    private List<CaseType> caseTypes;
 
     /*
     @EqualsAndHashCode.Exclude
