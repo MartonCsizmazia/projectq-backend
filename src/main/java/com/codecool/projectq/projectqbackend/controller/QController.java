@@ -13,7 +13,7 @@ import java.util.HashMap;
 @CrossOrigin
 @RestController
 public class QController {
-
+    /*
     private final Office office;
 
     @Autowired
@@ -30,4 +30,6 @@ public class QController {
         //return ticket;
         return null;
     }
+
+     */
 }

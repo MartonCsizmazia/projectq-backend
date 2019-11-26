@@ -1,7 +1,7 @@
 package com.codecool.projectq.projectqbackend.model;
 
-public enum CaseType {
 
+public enum CaseType {
     VEHICLE,
     PASSPORT,
     MEDICAL,

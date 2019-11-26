@@ -1,22 +1,35 @@
 package com.codecool.projectq.projectqbackend.model;
 
 import com.codecool.projectq.projectqbackend.model.Ticket;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-@Component
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
 public class Office {
 
+    @Id
+    @GeneratedValue
     private long id;
     private String name;
-    private Location location;
-    private List<Station> stations = new ArrayList<>();
-    private Queue<Ticket> tickets;
 
+    @OneToOne
+    private Location location;
+
+    @Singular
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "office", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Station> stations = new ArrayList<>();
 
 
     /*

@@ -1,14 +1,19 @@
 package com.codecool.projectq.projectqbackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Builder
+@Entity
 public class Location {
-
+    @Id
+    @GeneratedValue
     private long id;
 
     private int latitude;
