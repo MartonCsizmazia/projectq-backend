@@ -1,6 +1,7 @@
 package com.codecool.projectq.projectqbackend.controller;
 
 import com.codecool.projectq.projectqbackend.model.Office;
+import com.codecool.projectq.projectqbackend.service.OfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,27 +15,20 @@ import java.util.HashMap;
 @RestController
 public class QController {
 
-    private Office office;
-    /*
+    private OfficeService officeService;
+
+
     @Autowired
-    public QController(Office office) {
-        this.office = office;
+    public QController(OfficeService officeService) { //REPOSITORY ANNOTATION ADDED TO OFFICESERVICE if not -> no beans of officeService type found
+        this.officeService = officeService;
     }
-     */
 
-
-    /*
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
         String time = map.get("time");
         System.out.println("got it,time:  " + time);
         long timeOfRegistration = Long.parseLong(time);
-        //Ticket ticket = office.addTicket(timeOfRegistration);
-        //return ticket;
-        return null;
+        Ticket ticket = officeService.addTicket(timeOfRegistration);
+        return ticket;
     }
-     */
-
-
-
 }

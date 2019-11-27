@@ -28,4 +28,8 @@ public class Ticket {
 
     @ManyToOne
     private Station station;
+
+
+    public Ticket(String nextTicketId, long mytime, int size, long estimateTimeOfApointment) {
+    }
 }
