@@ -29,7 +29,10 @@ public class Ticket {
     @ManyToOne
     private Station station;
 
-
-    public Ticket(String nextTicketId, long mytime, int size, long estimateTimeOfApointment) {
+    public Ticket(long timeOfRegistration, int beforeMe, long estimatedTimeOfAppointment) {
+        this.timeOfRegistration = timeOfRegistration;
+        this.beforeMe = beforeMe;
+        this.estimatedTimeOfAppointment = estimatedTimeOfAppointment;
     }
+
 }

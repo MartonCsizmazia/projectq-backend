@@ -26,11 +26,8 @@ public class QController {
 
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
-        String time = map.get("time");
-        System.out.println("got it,time:  " + time);
-        long timeOfRegistration = Long.parseLong(time);
-        Ticket ticket = officeService.addTicket(timeOfRegistration);
-        List<CaseType> caseTypeList = officeService.getCaseTypeList();
+        Ticket ticket = officeService.addTicket();
+        //List<CaseType> caseTypeList = officeService.getCaseTypeList();
         return ticket;
     }
 }
