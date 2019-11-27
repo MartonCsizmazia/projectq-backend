@@ -24,16 +24,9 @@ public class Ticket {
     private long timeOfRegistration;
     private long beforeMe;
     private long estimatedTimeOfAppointment;
-    //private long
     private CaseType caseType;
 
     @ManyToOne
     private Station station;
-
-    public Ticket(long timeOfRegistration, long beforeMe, long estimatedTimeOfAppointment) {
-        this.timeOfRegistration = timeOfRegistration;
-        this.beforeMe = beforeMe;
-        this.estimatedTimeOfAppointment = estimatedTimeOfAppointment;
-    }
 
 }

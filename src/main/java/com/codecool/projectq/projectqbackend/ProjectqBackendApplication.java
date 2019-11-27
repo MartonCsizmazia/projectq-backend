@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cglib.core.Local;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
-//first commit try
 @SpringBootApplication
 public class ProjectqBackendApplication {
 
@@ -87,6 +85,10 @@ public class ProjectqBackendApplication {
                     .password("8769")
                     .userName("Tomika")
                     .build();
+            Officer teri_gyor = Officer.builder()
+                    .password("8769")
+                    .userName("Teri")
+                    .build();
 
             Station station1_gyor = Station.builder()
                     .officer(sarika_gyor)
@@ -97,6 +99,10 @@ public class ProjectqBackendApplication {
                     .caseType(CaseType.MEDICAL)
                     .build();
             Station station3_gyor = Station.builder()
+                    .officer(teri_gyor)
+                    .caseType(CaseType.MEDICAL)
+                    .build();
+            Station station4_gyor = Station.builder()
                     .officer(tomika_gyor)
                     .caseType(CaseType.REAL_ESTATE)
                     .build();
@@ -107,11 +113,13 @@ public class ProjectqBackendApplication {
                     .station(station1_gyor)
                     .station(station2_gyor)
                     .station(station3_gyor)
+                    .station(station4_gyor)
                     .build();
 
             station1_gyor.setOffice(gyori_iroda);
             station2_gyor.setOffice(gyori_iroda);
             station3_gyor.setOffice(gyori_iroda);
+            station4_gyor.setOffice(gyori_iroda);
 
             officeRepository.save(nagymezo_utcai_iroda);
             officeRepository.save(gyori_iroda);
