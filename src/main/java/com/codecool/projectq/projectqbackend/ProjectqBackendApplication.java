@@ -46,7 +46,6 @@ public class ProjectqBackendApplication {
             Station station1_nagymezo = Station.builder()
                     .officer(petike_nagymezo)
                     .caseType(CaseType.VEHICLE)
-                    .caseType(CaseType.PASSPORT)
                     .build();
             Station station2_nagymezo = Station.builder()
                     .officer(orsika_nagymezo)
@@ -92,7 +91,6 @@ public class ProjectqBackendApplication {
             Station station1_gyor = Station.builder()
                     .officer(sarika_gyor)
                     .caseType(CaseType.VEHICLE)
-                    .caseType(CaseType.PASSPORT)
                     .build();
             Station station2_gyor = Station.builder()
                     .officer(jolanka_gyor)

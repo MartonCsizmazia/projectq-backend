@@ -22,11 +22,9 @@ public class OfficeService {
     @Autowired
     private TicketRepository ticketRepository;
 
-
     private static final long WAITTIME = 10000;
 
     private Queue<Ticket> queue = new LinkedList<>();
-
 
     public List<String> getAllOfficeNames(){
         List<Office> offices = officeRepository.findAll();
@@ -57,5 +55,4 @@ public class OfficeService {
     public List<CaseType> getCaseTypeList() {
         return caseTypeList;
     }
-
 }

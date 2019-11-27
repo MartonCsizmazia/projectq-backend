@@ -24,6 +24,7 @@ public class Ticket {
     private long timeOfRegistration;
     private int beforeMe;
     private long estimatedTimeOfAppointment;
+    //private long
     private CaseType caseType;
 
     @ManyToOne

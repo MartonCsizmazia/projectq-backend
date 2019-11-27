@@ -24,15 +24,12 @@ public class Station {
     private Officer officer;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection
-    @Singular
     @EqualsAndHashCode.Exclude
-    private List<CaseType> caseTypes;
+    private CaseType caseType;
 
     /*
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "station", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Queue<Ticket> tickets;
-
      */
 }
