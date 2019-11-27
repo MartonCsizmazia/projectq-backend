@@ -3,8 +3,6 @@ package com.codecool.projectq.projectqbackend.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Queue;
 
 @Data
 @NoArgsConstructor
@@ -27,9 +25,4 @@ public class Station {
     @EqualsAndHashCode.Exclude
     private CaseType caseType;
 
-    /*
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "station", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Queue<Ticket> tickets;
-     */
 }

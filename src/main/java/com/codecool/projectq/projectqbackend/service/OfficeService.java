@@ -24,7 +24,6 @@ public class OfficeService {
 
     private static final long WAITTIME = 10000;
 
-    private Queue<Ticket> queue = new LinkedList<>();
 
     public List<String> getAllOfficeNames(){
         List<Office> offices = officeRepository.findAll();
@@ -35,10 +34,13 @@ public class OfficeService {
 
     public Ticket addTicket() {
         long myTime = getNow();
-        Ticket ticket = new Ticket(myTime, queue.size(), estimateTimeOfAppointment(myTime));
-        queue.add(ticket);
+        Ticket ticket = new Ticket(myTime, getNumberOfTickets(), estimateTimeOfAppointment(myTime));
         ticketRepository.save(ticket);
         return ticket;
+    }
+
+    private long getNumberOfTickets() {
+        return ticketRepository.count();
     }
 
     private static long getNow() {
@@ -47,7 +49,7 @@ public class OfficeService {
     }
 
     private long estimateTimeOfAppointment(long time){
-        return time + WAITTIME * queue.size();
+        return time + WAITTIME * getNumberOfTickets();
     }
 
     private List<CaseType> caseTypeList = new ArrayList<>(EnumSet.allOf(CaseType.class));

@@ -22,7 +22,7 @@ public class Ticket {
     @GeneratedValue
     private long id;
     private long timeOfRegistration;
-    private int beforeMe;
+    private long beforeMe;
     private long estimatedTimeOfAppointment;
     //private long
     private CaseType caseType;
@@ -30,7 +30,7 @@ public class Ticket {
     @ManyToOne
     private Station station;
 
-    public Ticket(long timeOfRegistration, int beforeMe, long estimatedTimeOfAppointment) {
+    public Ticket(long timeOfRegistration, long beforeMe, long estimatedTimeOfAppointment) {
         this.timeOfRegistration = timeOfRegistration;
         this.beforeMe = beforeMe;
         this.estimatedTimeOfAppointment = estimatedTimeOfAppointment;
