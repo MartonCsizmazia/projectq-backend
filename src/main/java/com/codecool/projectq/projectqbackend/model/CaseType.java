@@ -1,6 +1,8 @@
 package com.codecool.projectq.projectqbackend.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 public enum CaseType {
@@ -9,9 +11,11 @@ public enum CaseType {
     MEDICAL,
     REAL_ESTATE;
 
-    private List<CaseType> caseTypeList = Arrays.asList(CaseType.values());
+    //if the methods are not in comment, program runs to error:
+    //Could not create DynamicParameterizedType for type: org.hibernate.type.EnumType
 
-    public List<CaseType> getCaseTypeList() {
-        return caseTypeList;
-    }
+    //METHODS SHOULD BE IN SERVICE LAYER, it solves the problem
+    //private List<CaseType> caseTypeList = Arrays.asList(CaseType.values());
+
+
 }

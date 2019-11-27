@@ -1,15 +1,14 @@
 package com.codecool.projectq.projectqbackend.service;
 
 
+import com.codecool.projectq.projectqbackend.model.CaseType;
 import com.codecool.projectq.projectqbackend.model.Office;
 import com.codecool.projectq.projectqbackend.model.Ticket;
 import com.codecool.projectq.projectqbackend.repository.OfficeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -45,5 +44,10 @@ public class OfficeService {
         return time+WAITTIME*queue.size();
     }
 
+    private List<CaseType> caseTypeList = new ArrayList<>(EnumSet.allOf(CaseType.class));
+
+    public List<CaseType> getCaseTypeList() {
+        return caseTypeList;
+    }
 
 }
