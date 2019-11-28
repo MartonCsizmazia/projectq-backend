@@ -25,14 +25,16 @@ public class QController {
 
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
-        String officeName = "Győri iroda"; // TODO get from frontend (request body map)
-        String caseTypeDisplayName = "Medical"; // TODO get from frontend (request body map)
+        // defaults are just for test/debug
+        String officeName = map.getOrDefault("officeName", "Győri iroda");
+        String caseTypeDisplayName = map.getOrDefault("caseType", "Medical");
 
         Ticket ticket = null;
         try {
             ticket = officeService.addTicket(officeName, caseTypeDisplayName);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            // return null representing error
         }
         return ticket;
     }
