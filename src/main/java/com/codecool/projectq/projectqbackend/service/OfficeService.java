@@ -26,11 +26,30 @@ public class OfficeService {
     private StationRepository stationRepository;
 
 
+    private List<CaseType> caseTypeList = new ArrayList<>(EnumSet.allOf(CaseType.class));
+
+    public List<CaseType> getCaseTypeList() {
+        return caseTypeList;
+    }
+
     public List<String> getAllOfficeNames(){
         List<Office> offices = officeRepository.findAll();
         return offices.stream()
                 .map(Office::getName)
                 .collect(Collectors.toList());
+    }
+
+    private long getNumberOfTickets(CaseType caseType, String officeName) {
+        return ticketRepository.count();
+    }
+
+    private long getNumberOfStations(CaseType caseType, String officeName) {
+        return stationRepository.countByCaseTypeAndOffice_Name(caseType, officeName);
+    }
+
+    private long estimateTimeOfAppointment(long time, CaseType caseType, String officeName){
+        final long beforeMeAtStation = (long) Math.ceil((double) getNumberOfTickets(caseType, officeName) / (double) getNumberOfStations(caseType, officeName));
+        return time + caseType.getAvgWaitTimeInMinutes() * TimeUtil.MINUTE * beforeMeAtStation;
     }
 
     public Ticket addTicket(String officeName, CaseType caseType) {
@@ -43,24 +62,5 @@ public class OfficeService {
                 .build();
         ticketRepository.save(ticket);
         return ticket;
-    }
-
-    private long getNumberOfTickets(CaseType caseType, String officeName) {
-        return ticketRepository.count();
-    }
-
-    private long estimateTimeOfAppointment(long time, CaseType caseType, String officeName){
-        final long beforeMeAtStation = (long) Math.ceil((double) getNumberOfTickets(caseType, officeName) / (double) getNumberOfStations(caseType, officeName));
-        return time + caseType.getAvgWaitTimeInMinutes() * TimeUtil.MINUTE * beforeMeAtStation;
-    }
-
-    private long getNumberOfStations(CaseType caseType, String officeName) {
-        return stationRepository.countByCaseTypeAndOffice_Name(caseType, officeName);
-    }
-
-    private List<CaseType> caseTypeList = new ArrayList<>(EnumSet.allOf(CaseType.class));
-
-    public List<CaseType> getCaseTypeList() {
-        return caseTypeList;
     }
 }
