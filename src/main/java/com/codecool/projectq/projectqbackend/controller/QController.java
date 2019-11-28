@@ -33,7 +33,7 @@ public class QController {
     }
 
     @PostMapping("/")
-    public List<List> requestCaseList(@RequestBody HashMap<String,String> map){
+    public List<List> requestCaseList(){
 
         List<CaseType> caseTypeList = officeService.getCaseTypeList();
         List<String> offices = officeService.getAllOfficeNames();
