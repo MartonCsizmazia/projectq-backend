@@ -1,17 +1,22 @@
 package com.codecool.projectq.projectqbackend.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-
 public enum CaseType {
-    VEHICLE,
-    PASSPORT,
-    MEDICAL,
-    REAL_ESTATE;
+    VEHICLE(5),
+    PASSPORT(20),
+    MEDICAL(10),
+    REAL_ESTATE(50);
 
-    //if the methods are not in comment, program runs to error:
+    long avgWaitTimeInMinutes;
+
+    CaseType(long avgWaitTimeInMinutes) {
+        this.avgWaitTimeInMinutes = avgWaitTimeInMinutes;
+    }
+
+    public long getAvgWaitTimeInMinutes() {
+        return avgWaitTimeInMinutes;
+    }
+
+//if the methods are not in comment, program runs to error:
     //Could not create DynamicParameterizedType for type: org.hibernate.type.EnumType
 
     //METHODS SHOULD BE IN SERVICE LAYER, it solves the problem

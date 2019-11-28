@@ -26,7 +26,7 @@ public class OfficeService {
     @Autowired
     private StationRepository stationRepository;
 
-    private static final long WAITTIME = 10000;
+    private static final long MINUTE = 60000; // todo 1000 for debug mode
 
 
     public List<String> getAllOfficeNames(){
@@ -60,7 +60,7 @@ public class OfficeService {
     }
 
     private long estimateTimeOfAppointment(long time, CaseType caseType, String officeName){
-        return time + WAITTIME * (long) Math.ceil((double) getNumberOfTickets() / (double) getNumberOfStations(caseType, officeName));
+        return time + caseType.getAvgWaitTimeInMinutes() * MINUTE * (long) Math.ceil((double) getNumberOfTickets() / (double) getNumberOfStations(caseType, officeName));
     }
 
     private long getNumberOfStations(CaseType caseType, String officeName) {
