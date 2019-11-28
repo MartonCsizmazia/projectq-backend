@@ -27,7 +27,7 @@ public class QController {
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
         String officeName = "Győri iroda"; // TODO get from frontend (request body map)
-        CaseType caseType = CaseType.MEDICAL; // TODO get from frontend (request body map)
+        CaseType caseType = CaseType.getByDisplayName("Medical").get(); // TODO get from frontend (request body map)
         Ticket ticket = officeService.addTicket(officeName, caseType);
         return ticket;
     }
@@ -35,7 +35,7 @@ public class QController {
     @PostMapping("/")
     public List<List> requestCaseList(){
 
-        List<CaseType> caseTypeList = officeService.getCaseTypeList();
+        List<String> caseTypeList = officeService.getCaseTypeDisplayNameList();
         List<String> offices = officeService.getAllOfficeNames();
         List<List> sendList = new ArrayList<>();
 

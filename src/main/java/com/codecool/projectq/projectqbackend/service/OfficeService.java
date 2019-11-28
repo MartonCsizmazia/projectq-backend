@@ -26,10 +26,8 @@ public class OfficeService {
     private StationRepository stationRepository;
 
 
-    private List<CaseType> caseTypeList = new ArrayList<>(EnumSet.allOf(CaseType.class));
-
-    public List<CaseType> getCaseTypeList() {
-        return caseTypeList;
+    public List<String> getCaseTypeDisplayNameList() {
+        return CaseType.getAllDisplayNames();
     }
 
     public List<String> getAllOfficeNames(){
