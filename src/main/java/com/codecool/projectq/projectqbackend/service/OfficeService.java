@@ -40,7 +40,7 @@ public class OfficeService {
     }
 
     private long getNumberOfTickets(CaseType caseType, String officeName) {
-        return ticketRepository.count();
+        return ticketRepository.countByCaseTypeAndOffice_Name(caseType, officeName);
     }
 
     private long getNumberOfStations(CaseType caseType, String officeName) {
@@ -59,6 +59,7 @@ public class OfficeService {
                 .beforeMe(getNumberOfTickets(caseType, officeName))
                 .estimatedTimeOfAppointment(estimateTimeOfAppointment(myTime, caseType, officeName))
                 .caseType(caseType)
+                .office(officeRepository.findByName(officeName))
                 .build();
         ticketRepository.save(ticket);
         return ticket;

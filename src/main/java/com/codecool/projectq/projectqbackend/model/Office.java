@@ -28,4 +28,9 @@ public class Office {
     @OneToMany(mappedBy = "office", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Station> stations = new ArrayList<>();
 
+    @Singular
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "office", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Ticket> tickets = new LinkedList<>();
+
 }

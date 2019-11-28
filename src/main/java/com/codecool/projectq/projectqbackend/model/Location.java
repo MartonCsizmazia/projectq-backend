@@ -1,5 +1,6 @@
 package com.codecool.projectq.projectqbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -21,5 +22,6 @@ public class Location {
     private double longitude;
 
     @OneToOne(mappedBy = "location")
+    @JsonIgnore
     private Office office;
 }

@@ -1,5 +1,6 @@
 package com.codecool.projectq.projectqbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,5 +26,6 @@ public class Officer {
     private String userName;
 
     @OneToOne(mappedBy = "officer")
+    @JsonIgnore
     private Station station;
 }

@@ -1,5 +1,6 @@
 package com.codecool.projectq.projectqbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 public class Station {
 
     @ManyToOne
+    @JsonIgnore
     private Office office;
 
     @Id
