@@ -5,11 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +18,8 @@ public class Officer {
     @GeneratedValue
     private long id;
     private String password = "1234";
+
+    @Column(nullable = false, unique = true)
     private String userName;
 
     @OneToOne(mappedBy = "officer")

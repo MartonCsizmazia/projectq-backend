@@ -98,10 +98,6 @@ public class ProjectqBackendApplication {
                     .officer(jolanka_gyor)
                     .caseType(CaseType.MEDICAL)
                     .build();
-            Station station3_gyor = Station.builder()
-                    .officer(teri_gyor)
-                    .caseType(CaseType.MEDICAL)
-                    .build();
             Station station4_gyor = Station.builder()
                     .officer(tomika_gyor)
                     .caseType(CaseType.REAL_ESTATE)
@@ -112,13 +108,12 @@ public class ProjectqBackendApplication {
                     .location(location2)
                     .station(station1_gyor)
                     .station(station2_gyor)
-                    .station(station3_gyor)
                     .station(station4_gyor)
                     .build();
 
             station1_gyor.setOffice(gyori_iroda);
             station2_gyor.setOffice(gyori_iroda);
-            station3_gyor.setOffice(gyori_iroda);
+
             station4_gyor.setOffice(gyori_iroda);
 
             officeRepository.save(nagymezo_utcai_iroda);
