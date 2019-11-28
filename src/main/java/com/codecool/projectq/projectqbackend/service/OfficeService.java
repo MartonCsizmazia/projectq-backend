@@ -51,21 +51,15 @@ public class OfficeService {
         return time + caseType.getAvgWaitTimeInMinutes() * TimeUtil.MINUTE * beforeMeAtStation;
     }
 
-    public Ticket addTicket(String officeName, String caseTypeDisplayName) {
-
-        // TODO raise IllegalArgumentException, handle in caller (-> ...go to error page)
+    public Ticket addTicket(String officeName, String caseTypeDisplayName) throws IllegalArgumentException {
         Optional<CaseType> caseTypeOptional = CaseType.getByDisplayName(caseTypeDisplayName);
-        if (caseTypeOptional.isEmpty()) {
-            System.out.println("Invalid case type display name: " + caseTypeDisplayName);
-            return null;
-        }
+        if (caseTypeOptional.isEmpty())
+            throw new IllegalArgumentException("Invalid case type display name: " + caseTypeDisplayName);
         CaseType caseType = caseTypeOptional.get();
 
-        final Office chosenOffice = officeRepository.findByName(officeName);
-        if (chosenOffice == null) {
-            System.out.println("Invalid office name: " + officeName);
-            return null;
-        }
+        final Office chosenOffice = officeRepository.findByName(officeName); // todo replace officeName with office in methods?
+        if (chosenOffice == null)
+            throw new IllegalArgumentException("Invalid office name: " + officeName);
 
         long myTime = TimeUtil.getNow();
         Ticket ticket = Ticket.builder()

@@ -27,7 +27,13 @@ public class QController {
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
         String officeName = "Győri iroda"; // TODO get from frontend (request body map)
         String caseTypeDisplayName = "Medical"; // TODO get from frontend (request body map)
-        Ticket ticket = officeService.addTicket(officeName, caseTypeDisplayName);
+
+        Ticket ticket = null;
+        try {
+            ticket = officeService.addTicket(officeName, caseTypeDisplayName);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
         return ticket;
     }
 
