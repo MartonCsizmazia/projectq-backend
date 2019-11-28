@@ -8,6 +8,7 @@ import com.codecool.projectq.projectqbackend.repository.OfficeRepository;
 import com.codecool.projectq.projectqbackend.repository.StationRepository;
 import com.codecool.projectq.projectqbackend.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -50,14 +51,29 @@ public class OfficeService {
         return time + caseType.getAvgWaitTimeInMinutes() * TimeUtil.MINUTE * beforeMeAtStation;
     }
 
-    public Ticket addTicket(String officeName, CaseType caseType) {
+    public Ticket addTicket(String officeName, String caseTypeDisplayName) {
+
+        // TODO raise IllegalArgumentException, handle in caller (-> ...go to error page)
+        Optional<CaseType> caseTypeOptional = CaseType.getByDisplayName(caseTypeDisplayName);
+        if (caseTypeOptional.isEmpty()) {
+            System.out.println("Invalid case type display name: " + caseTypeDisplayName);
+            return null;
+        }
+        CaseType caseType = caseTypeOptional.get();
+
+        final Office chosenOffice = officeRepository.findByName(officeName);
+        if (chosenOffice == null) {
+            System.out.println("Invalid office name: " + officeName);
+            return null;
+        }
+
         long myTime = TimeUtil.getNow();
         Ticket ticket = Ticket.builder()
                 .timeOfRegistration(myTime)
                 .beforeMe(getNumberOfTickets(caseType, officeName))
                 .estimatedTimeOfAppointment(estimateTimeOfAppointment(myTime, caseType, officeName))
                 .caseType(caseType)
-                .office(officeRepository.findByName(officeName))
+                .office(chosenOffice)
                 .build();
         ticketRepository.save(ticket);
         return ticket;
