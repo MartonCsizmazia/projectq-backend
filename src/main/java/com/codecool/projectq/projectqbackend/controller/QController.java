@@ -3,10 +3,7 @@ package com.codecool.projectq.projectqbackend.controller;
 import com.codecool.projectq.projectqbackend.model.CaseType;
 import com.codecool.projectq.projectqbackend.service.OfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.codecool.projectq.projectqbackend.model.Ticket;
 
 import java.util.ArrayList;
@@ -32,8 +29,8 @@ public class QController {
         return ticket;
     }
 
-    @PostMapping("/")
-    public List<List> requestCaseList(@RequestBody HashMap<String,String> map){
+    @GetMapping("/")
+    public List<List> requestCaseList(){
 
         List<CaseType> caseTypeList = officeService.getCaseTypeList();
         List<String> offices = officeService.getAllOfficeNames();
