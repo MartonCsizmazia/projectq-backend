@@ -1,7 +1,6 @@
 package com.codecool.projectq.projectqbackend.controller;
 
 import com.codecool.projectq.projectqbackend.model.CaseType;
-import com.codecool.projectq.projectqbackend.model.Office;
 import com.codecool.projectq.projectqbackend.service.OfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +26,9 @@ public class QController {
 
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
-        Ticket ticket = officeService.addTicket();
+        String officeName = "Győri iroda"; // TODO get from frontend (request body map)
+        CaseType caseType = CaseType.MEDICAL; // TODO get from frontend (request body map)
+        Ticket ticket = officeService.addTicket(officeName, caseType);
         return ticket;
     }
 

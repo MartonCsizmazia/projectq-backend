@@ -35,11 +35,9 @@ public class OfficeService {
                 .map(Office::getName)
                 .collect(Collectors.toList());
     }
-// myTime, getNumberOfTickets(), estimateTimeOfAppointment(myTime)
-    public Ticket addTicket() {
+
+    public Ticket addTicket(String officeName, CaseType caseType) {
         long myTime = getNow();
-        CaseType caseType = CaseType.MEDICAL; //TEST! TODO get from frontend
-        String officeName = "Győri iroda"; //TEST! TODO get from frontend
         Ticket ticket = Ticket.builder()
                 .timeOfRegistration(myTime)
                 .beforeMe(getNumberOfTickets())
