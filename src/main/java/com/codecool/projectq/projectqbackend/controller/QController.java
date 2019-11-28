@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.codecool.projectq.projectqbackend.model.Ticket;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,7 +28,19 @@ public class QController {
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
         Ticket ticket = officeService.addTicket();
-        //List<CaseType> caseTypeList = officeService.getCaseTypeList();
         return ticket;
+    }
+
+    @PostMapping("/")
+    public List<List> requestCaseList(@RequestBody HashMap<String,String> map){
+
+        List<CaseType> caseTypeList = officeService.getCaseTypeList();
+        List<String> offices = officeService.getAllOfficeNames();
+        List<List> sendList = new ArrayList<>();
+
+        sendList.add(caseTypeList);
+        sendList.add(offices);
+
+        return sendList;
     }
 }
