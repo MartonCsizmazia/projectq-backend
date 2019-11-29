@@ -1,9 +1,7 @@
 package com.codecool.projectq.projectqbackend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -30,6 +28,12 @@ public class Ticket {
     private Status status = Status.WAITING;
 
     @ManyToOne
+    @JsonIgnore
     private Station station;
+
+    @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @JsonIgnore // to prevent recursive serialization attempt
+    private Office office;
 
 }

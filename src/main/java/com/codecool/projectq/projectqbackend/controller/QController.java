@@ -1,9 +1,11 @@
 package com.codecool.projectq.projectqbackend.controller;
 
-import com.codecool.projectq.projectqbackend.model.CaseType;
 import com.codecool.projectq.projectqbackend.service.OfficeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import com.codecool.projectq.projectqbackend.model.Ticket;
 
 import java.util.ArrayList;
@@ -23,16 +25,24 @@ public class QController {
 
     @PostMapping("/requestnumber")
     public Ticket requestNumber(@RequestBody HashMap<String,String> map){
-        String officeName = "Győri iroda"; // TODO get from frontend (request body map)
-        CaseType caseType = CaseType.MEDICAL; // TODO get from frontend (request body map)
-        Ticket ticket = officeService.addTicket(officeName, caseType);
+        // defaults are just for test/debug
+        String officeName = map.getOrDefault("officeName", "Győri iroda");
+        String caseTypeDisplayName = map.getOrDefault("caseType", "Medical");
+
+        Ticket ticket = null;
+        try {
+            ticket = officeService.addTicket(officeName, caseTypeDisplayName);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            // return null representing error
+        }
         return ticket;
     }
 
-    @GetMapping("/")
+    @PostMapping("/")
     public List<List> requestCaseList(){
 
-        List<CaseType> caseTypeList = officeService.getCaseTypeList();
+        List<String> caseTypeList = officeService.getCaseTypeDisplayNameList();
         List<String> offices = officeService.getAllOfficeNames();
         List<List> sendList = new ArrayList<>();
 
