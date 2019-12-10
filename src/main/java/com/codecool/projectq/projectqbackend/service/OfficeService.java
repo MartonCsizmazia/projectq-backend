@@ -1,6 +1,7 @@
 package com.codecool.projectq.projectqbackend.service;
 
 
+import com.codecool.projectq.projectqbackend.controller.requestdata.TicketRequestData;
 import com.codecool.projectq.projectqbackend.model.CaseType;
 import com.codecool.projectq.projectqbackend.model.Office;
 import com.codecool.projectq.projectqbackend.model.Ticket;
@@ -8,7 +9,6 @@ import com.codecool.projectq.projectqbackend.repository.OfficeRepository;
 import com.codecool.projectq.projectqbackend.repository.StationRepository;
 import com.codecool.projectq.projectqbackend.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -51,20 +51,28 @@ public class OfficeService {
         return time + caseType.getAvgWaitTimeInMinutes() * TimeUtil.MINUTE * beforeMeAtStation;
     }
 
-    public Ticket addTicket(String officeName, String caseTypeDisplayName) throws IllegalArgumentException {
+    public Ticket addTicket(TicketRequestData ticketRequestData) throws IllegalArgumentException {
+        String officeName = ticketRequestData.getOfficeName();
+        String caseTypeDisplayName = ticketRequestData.getCaseType();
+        // defaults: just for test/debug
+        if (officeName == null)
+            officeName = "Győri iroda";
+        if (caseTypeDisplayName == null)
+            caseTypeDisplayName = "Medical";
+
         Optional<CaseType> caseTypeOptional = CaseType.getByDisplayName(caseTypeDisplayName);
         if (caseTypeOptional.isEmpty())
             throw new IllegalArgumentException("Invalid case type display name: " + caseTypeDisplayName);
         CaseType caseType = caseTypeOptional.get();
 
-        final Office chosenOffice = officeRepository.findByName(officeName); // todo replace officeName with office in methods?
+        final Office chosenOffice = officeRepository.findByName(officeName);
         if (chosenOffice == null)
             throw new IllegalArgumentException("Invalid office name: " + officeName);
 
         long myTime = TimeUtil.getNow();
         Ticket ticket = Ticket.builder()
                 .timeOfRegistration(myTime)
-                .beforeMe(getNumberOfTickets(caseType, officeName))
+                .beforeMe(getNumberOfTickets(caseType, officeName)) // todo replace officeName with office in methods?
                 .estimatedTimeOfAppointment(estimateTimeOfAppointment(myTime, caseType, officeName))
                 .caseType(caseType)
                 .office(chosenOffice)

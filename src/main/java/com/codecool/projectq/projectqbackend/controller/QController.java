@@ -1,8 +1,7 @@
 package com.codecool.projectq.projectqbackend.controller;
 
+import com.codecool.projectq.projectqbackend.controller.requestdata.TicketRequestData;
 import com.codecool.projectq.projectqbackend.service.OfficeService;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,29 +25,11 @@ public class QController {
         this.officeService = officeService;
     }
 
-    @Data
-    @NoArgsConstructor
-    private class MyObj {
-        private String officeName;
-        private String caseType;
-    }
-
-    // TODO refactor to classes
-
-
     @PostMapping("/requestnumber")
-    public Ticket requestNumber(@RequestBody MyObj obj){
-        String officeName = obj.getOfficeName();
-        String caseTypeDisplayName = obj.getCaseType();
-        // defaults: just for test/debug
-        if (officeName == null)
-            officeName = "Győri iroda";
-        if (caseTypeDisplayName == null)
-            caseTypeDisplayName = "Medical";
-
+    public Ticket requestTicket(@RequestBody TicketRequestData ticketRequestData){
         Ticket ticket = null;
         try {
-            ticket = officeService.addTicket(officeName, caseTypeDisplayName);
+            ticket = officeService.addTicket(ticketRequestData);
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
             // return null representing error
