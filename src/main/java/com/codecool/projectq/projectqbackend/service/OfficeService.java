@@ -38,16 +38,16 @@ public class OfficeService {
                 .collect(Collectors.toList());
     }
 
-    private long getNumberOfTickets(CaseType caseType, String officeName) {
-        return ticketRepository.countByCaseTypeAndOffice_Name(caseType, officeName);
+    private long getNumberOfTickets(CaseType caseType, Office office) {
+        return ticketRepository.countByCaseTypeAndOffice(caseType, office);
     }
 
-    private long getNumberOfStations(CaseType caseType, String officeName) {
-        return stationRepository.countByCaseTypeAndOffice_Name(caseType, officeName);
+    private long getNumberOfStations(CaseType caseType, Office office) {
+        return stationRepository.countByCaseTypeAndOffice(caseType, office);
     }
 
-    private long estimateTimeOfAppointment(long time, CaseType caseType, String officeName){
-        final long beforeMeAtStation = (long) Math.ceil((double) getNumberOfTickets(caseType, officeName) / (double) getNumberOfStations(caseType, officeName));
+    private long estimateTimeOfAppointment(long time, CaseType caseType, Office office){
+        final long beforeMeAtStation = (long) Math.ceil((double) getNumberOfTickets(caseType, office) / (double) getNumberOfStations(caseType, office));
         return time + caseType.getAvgWaitTimeInMinutes() * TimeUtil.MINUTE * beforeMeAtStation;
     }
 
@@ -72,8 +72,8 @@ public class OfficeService {
         long myTime = TimeUtil.getNow();
         Ticket ticket = Ticket.builder()
                 .timeOfRegistration(myTime)
-                .beforeMe(getNumberOfTickets(caseType, officeName)) // todo replace officeName with office in methods?
-                .estimatedTimeOfAppointment(estimateTimeOfAppointment(myTime, caseType, officeName))
+                .beforeMe(getNumberOfTickets(caseType, chosenOffice))
+                .estimatedTimeOfAppointment(estimateTimeOfAppointment(myTime, caseType, chosenOffice))
                 .caseType(caseType)
                 .office(chosenOffice)
                 .build();
