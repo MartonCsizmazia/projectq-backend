@@ -1,6 +1,6 @@
 package com.codecool.projectq.projectqbackend.controller;
 
-import com.codecool.projectq.projectqbackend.model.user.UserCredentials;
+import com.codecool.projectq.projectqbackend.model.UserCredentials;
 import com.codecool.projectq.projectqbackend.repository.UserRepository;
 import com.codecool.projectq.projectqbackend.security.JwtTokenServices;
 import org.springframework.http.ResponseEntity;
