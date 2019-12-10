@@ -1,6 +1,6 @@
 package com.codecool.projectq.projectqbackend.security;
 
-import com.codecool.projectq.projectqbackend.model.user.QAppUser;
+import com.codecool.projectq.projectqbackend.model.QAppUser;
 import com.codecool.projectq.projectqbackend.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
