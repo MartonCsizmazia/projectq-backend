@@ -1,6 +1,7 @@
 package com.codecool.projectq.projectqbackend;
 
 import com.codecool.projectq.projectqbackend.model.*;
+import com.codecool.projectq.projectqbackend.model.user.QAppUser;
 import com.codecool.projectq.projectqbackend.repository.OfficeRepository;
 import com.codecool.projectq.projectqbackend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;

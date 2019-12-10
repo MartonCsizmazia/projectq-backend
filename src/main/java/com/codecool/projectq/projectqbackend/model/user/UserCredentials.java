@@ -1,4 +1,4 @@
-package com.codecool.projectq.projectqbackend.model;
+package com.codecool.projectq.projectqbackend.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
