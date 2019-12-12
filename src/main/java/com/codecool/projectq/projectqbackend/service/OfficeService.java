@@ -1,6 +1,8 @@
 package com.codecool.projectq.projectqbackend.service;
 
 
+import com.codecool.projectq.projectqbackend.controller.exception.InvalidCaseTypeException;
+import com.codecool.projectq.projectqbackend.controller.exception.InvalidOfficeNameException;
 import com.codecool.projectq.projectqbackend.controller.exception.InvalidRequestDataException;
 import com.codecool.projectq.projectqbackend.controller.requestdata.TicketRequestData;
 import com.codecool.projectq.projectqbackend.model.CaseType;
@@ -63,12 +65,12 @@ public class OfficeService {
 
         Optional<CaseType> caseTypeOptional = CaseType.getByDisplayName(caseTypeDisplayName);
         if (caseTypeOptional.isEmpty())
-            throw new InvalidRequestDataException("Invalid case type display name: " + caseTypeDisplayName);
+            throw new InvalidCaseTypeException(caseTypeDisplayName);
         CaseType caseType = caseTypeOptional.get();
 
         final Office chosenOffice = officeRepository.findByName(officeName);
         if (chosenOffice == null)
-            throw new InvalidRequestDataException("Invalid office name: " + officeName);
+            throw new InvalidOfficeNameException(officeName);
 
         long myTime = TimeUtil.getNow();
         Ticket ticket = Ticket.builder()
