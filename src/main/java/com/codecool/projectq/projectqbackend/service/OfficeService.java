@@ -1,6 +1,9 @@
 package com.codecool.projectq.projectqbackend.service;
 
 
+import com.codecool.projectq.projectqbackend.controller.exception.InvalidCaseTypeException;
+import com.codecool.projectq.projectqbackend.controller.exception.InvalidOfficeNameException;
+import com.codecool.projectq.projectqbackend.controller.exception.InvalidRequestDataException;
 import com.codecool.projectq.projectqbackend.controller.requestdata.TicketRequestData;
 import com.codecool.projectq.projectqbackend.model.CaseType;
 import com.codecool.projectq.projectqbackend.model.Office;
@@ -51,7 +54,7 @@ public class OfficeService {
         return time + caseType.getAvgWaitTimeInMinutes() * TimeUtil.MINUTE * beforeMeAtStation;
     }
 
-    public Ticket addTicket(TicketRequestData ticketRequestData) throws IllegalArgumentException {
+    public Ticket addTicket(TicketRequestData ticketRequestData) throws InvalidRequestDataException {
         String officeName = ticketRequestData.getOfficeName();
         String caseTypeDisplayName = ticketRequestData.getCaseType();
         // defaults: just for test/debug
@@ -62,12 +65,12 @@ public class OfficeService {
 
         Optional<CaseType> caseTypeOptional = CaseType.getByDisplayName(caseTypeDisplayName);
         if (caseTypeOptional.isEmpty())
-            throw new IllegalArgumentException("Invalid case type display name: " + caseTypeDisplayName);
+            throw new InvalidCaseTypeException(caseTypeDisplayName);
         CaseType caseType = caseTypeOptional.get();
 
         final Office chosenOffice = officeRepository.findByName(officeName);
         if (chosenOffice == null)
-            throw new IllegalArgumentException("Invalid office name: " + officeName);
+            throw new InvalidOfficeNameException(officeName);
 
         long myTime = TimeUtil.getNow();
         Ticket ticket = Ticket.builder()
