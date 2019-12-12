@@ -25,14 +25,7 @@ public class QController {
 
     @PostMapping("/requestnumber")
     public Ticket requestTicket(@RequestBody TicketRequestData ticketRequestData){
-        Ticket ticket = null;
-        try {
-            ticket = officeService.addTicket(ticketRequestData);
-        } catch (IllegalArgumentException e) {
-            log.error(e.getMessage());
-            // return null representing error
-        }
-        return ticket;
+        return officeService.addTicket(ticketRequestData);
     }
 
     @PostMapping("/")
