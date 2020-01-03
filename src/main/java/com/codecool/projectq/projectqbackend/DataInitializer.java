@@ -45,7 +45,7 @@ public class DataInitializer implements CommandLineRunner {
             .build()
         );
         log.debug("printing all users...");
-        users.findAll().forEach(v -> log.debug(" VehicleAppUser :" + v.toString()));
+        users.findAll().forEach(v -> log.debug(" AppUser :" + v.toString()));
 
     }
 
