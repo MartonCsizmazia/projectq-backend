@@ -1,4 +1,6 @@
-Testing from Postman:
+# Testing by HTTP request:
+
+## From Postman:
 
 1. Authentication:
 
@@ -20,14 +22,11 @@ Testing from Postman:
     (just in itself, eg. eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTU3NjAwNDE2NCwiZXhwIjoxNTc2MDA3NzY0fQ.qhjRuu7dmxSRS2sn3PGipELxqTEx6G8ccONHTsCR8uM)
 
 
------------
+---
 
-From IntelliJ:
-
-
------------
-From cURL:
+## From cURL:
 (copy this into command line)
+(convert Postman -> cURL: click "Code" (right top), select cURL
 
 1. Authentication:
 ```
@@ -45,5 +44,28 @@ curl -X POST \
   -H 'Content-Type: application/json' \
 ```
 
-    
+---
+## From IntelliJ:
 
+(rightclick on sidebar -> New -> HTTP Request)
+
+1. Authentication:
+```
+POST http://localhost:8080/auth/signin
+Content-Type: application/json
+
+{
+"username": "user",
+"password": "password"
+}
+
+```
+2. Using the usual features authorized, eg.:
+```
+POST http://localhost:8080/
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTU3ODE0NDY0NywiZXhwIjoxNTc4MTQ4MjQ3fQ.Ok7U17K1NteGMyF1Fu7hdMAH3RVz2DOGLXe20832P9k
+Content-Type: application/json
+```
+(or: Convert from cURL )
+
+-----------
