@@ -1,7 +1,7 @@
 package com.codecool.projectq.projectqbackend.controller;
 
 import com.codecool.projectq.projectqbackend.controller.requestdata.TicketRequestData;
-import com.codecool.projectq.projectqbackend.controller.requestdata.WelcomePageData;
+import com.codecool.projectq.projectqbackend.controller.responsedata.WelcomePageData;
 import com.codecool.projectq.projectqbackend.service.OfficeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

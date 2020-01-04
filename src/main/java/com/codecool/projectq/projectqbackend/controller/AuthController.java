@@ -1,6 +1,6 @@
 package com.codecool.projectq.projectqbackend.controller;
 
-import com.codecool.projectq.projectqbackend.model.UserCredentials;
+import com.codecool.projectq.projectqbackend.controller.requestdata.UserCredentials;
 import com.codecool.projectq.projectqbackend.repository.UserRepository;
 import com.codecool.projectq.projectqbackend.security.JwtTokenServices;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +46,7 @@ public class AuthController {
 
             String token = jwtTokenServices.createToken(username, roles);
 
+            // todo into responsedata.userAuthData object?
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
             model.put("roles", roles);
