@@ -40,7 +40,7 @@ curl -X POST   http://localhost:8080/auth/signin    -H 'Content-Type: applicatio
 ```
 curl -X POST \
   http://localhost:8080/ \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTU3ODE0NDY0NywiZXhwIjoxNTc4MTQ4MjQ3fQ.Ok7U17K1NteGMyF1Fu7hdMAH3RVz2DOGLXe20832P9k' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTU3ODE1NjE0OCwiZXhwIjoxNTc4MTU5NzQ4fQ._5sBi9lYtU9NCRKAQv2VmVJFM2A3kPRpnhFYKNy7dps' \
   -H 'Content-Type: application/json' \
 ```
 

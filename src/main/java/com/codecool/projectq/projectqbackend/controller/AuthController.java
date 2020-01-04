@@ -1,6 +1,7 @@
 package com.codecool.projectq.projectqbackend.controller;
 
 import com.codecool.projectq.projectqbackend.controller.requestdata.UserCredentials;
+import com.codecool.projectq.projectqbackend.controller.responsedata.UserAuthData;
 import com.codecool.projectq.projectqbackend.repository.UserRepository;
 import com.codecool.projectq.projectqbackend.security.JwtTokenServices;
 import org.springframework.http.ResponseEntity;
@@ -46,12 +47,8 @@ public class AuthController {
 
             String token = jwtTokenServices.createToken(username, roles);
 
-            // todo into responsedata.userAuthData object?
-            Map<Object, Object> model = new HashMap<>();
-            model.put("username", username);
-            model.put("roles", roles);
-            model.put("token", token);
-            return ResponseEntity.ok(model);
+            UserAuthData userAuthData = new UserAuthData(username, roles, token);
+            return ResponseEntity.ok(userAuthData);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
