@@ -8,13 +8,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.WebUtils;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Slf4j
@@ -51,10 +50,12 @@ public class JwtTokenServices {
     }
 
     String getTokenFromRequest(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+        String bearerToken = WebUtils.getCookie(req, "token").getValue();
+        System.out.println("SOUT !!!!!!!!!!!!!!!!!");
+        System.out.println(Arrays.asList(bearerToken));
+        /*if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7, bearerToken.length());
-        }
+        }*/
         return null;
     }
 
