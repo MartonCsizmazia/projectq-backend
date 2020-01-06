@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/signin").permitAll() // allowed for anyone
                 .antMatchers( "/**").authenticated() // allowed only when signed in
+                .antMatchers( "/requestnumber").authenticated() // allowed only when signed in
                 //.anyRequest().hasRole("ADMIN")  // anything else is only for admins
             .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);

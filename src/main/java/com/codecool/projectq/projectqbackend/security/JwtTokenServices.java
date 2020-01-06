@@ -50,13 +50,17 @@ public class JwtTokenServices {
     }
 
     String getTokenFromRequest(HttpServletRequest req) {
+        String bearerToken = req.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7, bearerToken.length());
+        }
+        return null;
+    }
+    String getBearerTokenFromCookie(HttpServletRequest req){
         String bearerToken = WebUtils.getCookie(req, "token").getValue();
         System.out.println("SOUT !!!!!!!!!!!!!!!!!");
         System.out.println(Arrays.asList(bearerToken));
-        /*if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
-        }*/
-        return null;
+        return bearerToken;
     }
 
     // checks if the token is valid and not expired.
