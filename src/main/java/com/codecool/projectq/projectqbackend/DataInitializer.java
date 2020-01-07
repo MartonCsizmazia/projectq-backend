@@ -33,14 +33,14 @@ public class DataInitializer implements CommandLineRunner {
 
         users.save(QAppUser.builder()
             .username("user")
-            .password(passwordEncoder.encode("password"))
+            .password(passwordEncoder.encode("p"))
             .roles(Arrays.asList("ROLE_USER"))
             .build()
         );
 
         users.save(QAppUser.builder()
             .username("admin")
-            .password(passwordEncoder.encode("password"))
+            .password(passwordEncoder.encode("p"))
             .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
             .build()
         );

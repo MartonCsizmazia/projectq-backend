@@ -22,7 +22,6 @@ public class JwtTokenFilter extends GenericFilterBean {
     // this is called for every request that comes in (unless its filtered out before in the chain)
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println(req);
         String token = jwtTokenServices.getTokenFromRequest((HttpServletRequest) req);
         if (token != null && jwtTokenServices.validateToken(token)) {
             Authentication auth = jwtTokenServices.parseUserFromTokenInfo(token);
