@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-public class OfficeService {
+public class OfficeService{
 
     @Autowired
     private OfficeRepository officeRepository;
@@ -35,8 +35,12 @@ public class OfficeService {
         return CaseType.getAllDisplayNames();
     }
 
+    public List<Office> getAllOffices(){
+        return officeRepository.findAll();
+    }
+
     public List<String> getAllOfficeNames(){
-        List<Office> offices = officeRepository.findAll();
+        List<Office> offices = getAllOffices();
         return offices.stream()
                 .map(Office::getName)
                 .collect(Collectors.toList());

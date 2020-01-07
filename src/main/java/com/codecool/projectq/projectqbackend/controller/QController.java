@@ -3,21 +3,31 @@ package com.codecool.projectq.projectqbackend.controller;
 import com.codecool.projectq.projectqbackend.controller.requestdata.TicketRequestData;
 import com.codecool.projectq.projectqbackend.controller.responsedata.WelcomePageData;
 import com.codecool.projectq.projectqbackend.model.CurrentPosition;
+import com.codecool.projectq.projectqbackend.model.Office;
 import com.codecool.projectq.projectqbackend.model.QAppUser;
 import com.codecool.projectq.projectqbackend.service.OfficeService;
+import com.codecool.projectq.projectqbackend.service.UserSerivce;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.codecool.projectq.projectqbackend.model.Ticket;
+
+import java.util.HashMap;
+import java.util.List;
 
 @CrossOrigin
 @RestController
 @Slf4j
 public class QController {
 
+    @Autowired
     private OfficeService officeService;
 
+    @Autowired
     private QAppUser qAppUser;
+
+    @Autowired
+    private UserSerivce userSerivce;
 
     @Autowired
     public QController(OfficeService officeService) { //REPOSITORY ANNOTATION ADDED TO OFFICESERVICE if not -> no beans of officeService type found
@@ -41,5 +51,9 @@ public class QController {
     public void getCurrentPosition(@RequestBody CurrentPosition currentposition){
         qAppUser.getCurrentPosition().setLatitude(currentposition.getLatitude());
         qAppUser.getCurrentPosition().setLongitude(currentposition.getLongitude());
+    }
+
+    public HashMap<String, Integer> calculateDistance(){
+        return userSerivce.getDistanccesToOffices(qAppUser.getCurrentPosition().getLatitude(), qAppUser.getCurrentPosition().getLongitude());
     }
 }
