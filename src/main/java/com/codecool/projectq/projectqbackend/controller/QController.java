@@ -17,7 +17,6 @@ public class QController {
 
     private OfficeService officeService;
 
-    @Autowired
     private QAppUser qAppUser;
 
     @Autowired

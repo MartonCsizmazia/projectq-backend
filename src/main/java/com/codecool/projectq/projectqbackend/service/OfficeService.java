@@ -12,12 +12,13 @@ import com.codecool.projectq.projectqbackend.repository.OfficeRepository;
 import com.codecool.projectq.projectqbackend.repository.StationRepository;
 import com.codecool.projectq.projectqbackend.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Repository
+@Component
 public class OfficeService {
 
     @Autowired

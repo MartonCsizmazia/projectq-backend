@@ -19,6 +19,10 @@ import javax.persistence.OneToOne;
 @Entity
 public class CurrentPosition {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private double latitude;
     private double longitude;
 
