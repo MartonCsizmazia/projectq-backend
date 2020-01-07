@@ -56,12 +56,6 @@ public class JwtTokenServices {
         }
         return null;
     }
-    String getBearerTokenFromCookie(HttpServletRequest req){
-        String bearerToken = WebUtils.getCookie(req, "token").getValue();
-        System.out.println("SOUT !!!!!!!!!!!!!!!!!");
-        System.out.println(Arrays.asList(bearerToken));
-        return bearerToken;
-    }
 
     // checks if the token is valid and not expired.
     boolean validateToken(String token) {
