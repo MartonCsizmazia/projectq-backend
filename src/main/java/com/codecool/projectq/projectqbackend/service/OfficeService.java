@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-public class OfficeService implements OfficeGetter{
+public class OfficeService{
 
     @Autowired
     private OfficeRepository officeRepository;
