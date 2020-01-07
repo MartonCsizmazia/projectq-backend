@@ -2,13 +2,12 @@ package com.codecool.projectq.projectqbackend.controller;
 
 import com.codecool.projectq.projectqbackend.controller.requestdata.TicketRequestData;
 import com.codecool.projectq.projectqbackend.controller.responsedata.WelcomePageData;
+import com.codecool.projectq.projectqbackend.model.CurrentPosition;
+import com.codecool.projectq.projectqbackend.model.QAppUser;
 import com.codecool.projectq.projectqbackend.service.OfficeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.codecool.projectq.projectqbackend.model.Ticket;
 
 @CrossOrigin
@@ -17,6 +16,9 @@ import com.codecool.projectq.projectqbackend.model.Ticket;
 public class QController {
 
     private OfficeService officeService;
+
+    @Autowired
+    private QAppUser qAppUser;
 
     @Autowired
     public QController(OfficeService officeService) { //REPOSITORY ANNOTATION ADDED TO OFFICESERVICE if not -> no beans of officeService type found
@@ -34,5 +36,11 @@ public class QController {
                 .caseTypeList(officeService.getCaseTypeDisplayNameList())
                 .offices(officeService.getAllOfficeNames())
                 .build();
+    }
+
+    @GetMapping("/")
+    public void getCurrentPosition(@RequestBody CurrentPosition currentposition){
+        qAppUser.getCurrentPosition().setLatitude(currentposition.getLatitude());
+        qAppUser.getCurrentPosition().setLongitude(currentposition.getLongitude());
     }
 }
