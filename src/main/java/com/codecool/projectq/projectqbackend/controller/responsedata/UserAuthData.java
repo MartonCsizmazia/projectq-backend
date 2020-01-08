@@ -13,5 +13,4 @@ import java.util.List;
 public class UserAuthData {
     String username;
     List<String> roles;
-    String token;
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.codecool.projectq.projectqbackend.model.Ticket;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,6 +52,17 @@ public class QController {
     public void getCurrentPosition(@RequestBody CurrentPosition currentposition){
         qAppUser.getCurrentPosition().setLatitude(currentposition.getLatitude());
         qAppUser.getCurrentPosition().setLongitude(currentposition.getLongitude());
+    }
+
+    @GetMapping("/test")
+    public List<String> test(){
+        List<String> list = new ArrayList<>();
+        list.add("dolok");
+        list.add("minden");
+        list.add("más");
+        list.add("Balázs");
+        list.add("<3>");
+        return list;
     }
 
     public HashMap<String, Integer> calculateDistance(){

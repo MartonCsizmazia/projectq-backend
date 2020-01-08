@@ -50,9 +50,18 @@ public class JwtTokenServices {
     }
 
     String getTokenFromRequest(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
+        Cookie[] cookies = req.getCookies();
+        Cookie cookie = new Cookie("token", null);
+        if (cookies != null) {
+            for (Cookie c : cookies) {
+                if (c.getName().equals("token")) {
+                    cookie.setValue(c.getValue());
+                }
+            }
+//            if (cookie.getValue().startsWith("Bearer ")) {
+            if (true) {
+                return cookie.getValue().substring(7, cookie.getValue().length());
+            }
         }
         return null;
     }

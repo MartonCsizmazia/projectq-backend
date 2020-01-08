@@ -4,6 +4,9 @@ import com.codecool.projectq.projectqbackend.controller.requestdata.UserCredenti
 import com.codecool.projectq.projectqbackend.controller.responsedata.UserAuthData;
 import com.codecool.projectq.projectqbackend.repository.UserRepository;
 import com.codecool.projectq.projectqbackend.security.JwtTokenServices;
+import org.apache.catalina.connector.Response;
+import org.apache.http.protocol.ResponseContent;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,6 +16,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +39,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity signin(@RequestBody UserCredentials data) {
+    public ResponseEntity signin(@RequestBody UserCredentials data, HttpServletResponse response) {
         try {
             String username = data.getUsername();
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
@@ -44,9 +50,13 @@ public class AuthController {
                     .collect(Collectors.toList());
 
             String token = jwtTokenServices.createToken(username, roles);
+            Cookie cookie = new Cookie("token", token);
+            cookie.setMaxAge(60*60*24);
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
 
-            UserAuthData userAuthData = new UserAuthData(username, roles, token);
-            return ResponseEntity.ok(userAuthData);
+            response.addCookie(cookie);
+            return ResponseEntity.ok("");
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
