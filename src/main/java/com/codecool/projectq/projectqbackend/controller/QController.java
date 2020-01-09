@@ -47,10 +47,9 @@ public class QController {
         return WelcomePageData.builder()
                 .caseTypeList(officeService.getCaseTypeDisplayNameList())
                 .offices(officeService.getAllOfficeNames())
+                .closestOffice(userSerivce.getClosestOffice(userSerivce.getDistanccesToOffices(qAppUser.getCurrentPosition().getLatitude(), qAppUser.getCurrentPosition().getLongitude())))
                 .build();
     }
-
-
 
     @GetMapping("/test")
     public List<String> test(){
@@ -67,6 +66,6 @@ public class QController {
         return userSerivce.getDistanccesToOffices(qAppUser.getCurrentPosition().getLatitude(), qAppUser.getCurrentPosition().getLongitude());
     }
 
-    public HashMap<String, Integer>
+
 
 }
