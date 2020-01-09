@@ -2,6 +2,7 @@ package com.codecool.projectq.projectqbackend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -34,10 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/signin").permitAll() // allowed for anyone
-                .antMatchers("/**").authenticated() // allowed only when signed in
-                .antMatchers("/requestnumber").authenticated() // allowed only when signed in
+                //.antMatchers("/auth/signin").permitAll() // allowed for anyone
+                //.antMatchers(HttpMethod.POST, "/").authenticated() // allowed only when signed in
+                //.antMatchers("/requestnumber").authenticated() // allowed only when signed in
                 //.anyRequest().hasRole("ADMIN")  // anything else is only for admins
+                .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);
     }

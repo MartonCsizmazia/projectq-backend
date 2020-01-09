@@ -59,8 +59,8 @@ public class JwtTokenServices {
                 }
             }
 //            if (cookie.getValue().startsWith("Bearer ")) {
-            if (true) {
-                return cookie.getValue().substring(7, cookie.getValue().length());
+            if (cookie.getValue().startsWith("Bearer")) {
+                return cookie.getValue().substring(6, cookie.getValue().length());
             }
         }
         return null;
