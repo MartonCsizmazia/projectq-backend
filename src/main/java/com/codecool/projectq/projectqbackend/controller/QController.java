@@ -68,4 +68,5 @@ public class QController {
     public HashMap<String, Integer> calculateDistance(){
         return userSerivce.getDistanccesToOffices(qAppUser.getCurrentPosition().getLatitude(), qAppUser.getCurrentPosition().getLongitude());
     }
+
 }

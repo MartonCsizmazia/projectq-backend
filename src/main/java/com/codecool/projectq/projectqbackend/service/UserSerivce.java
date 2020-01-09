@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class UserSerivce {
@@ -62,5 +63,32 @@ public class UserSerivce {
             distanccesToOffices.put(office.getName(), (int) distance);
         }
         return distanccesToOffices;
+    }
+
+    public HashMap<String, Integer> getClosestOffice(HashMap<String, Integer> mymap){
+        HashMap <String, Integer> closestOffice = new HashMap<>();
+
+        Integer max = 0;
+
+        for (Map.Entry<String, Integer> entry : mymap.entrySet()) {
+            assert false;
+            if(entry.getValue() > max){
+                max = entry.getValue();
+            }
+        }
+        Integer min = max;
+        String minKey = null;
+
+        for (Map.Entry<String, Integer> entry : mymap.entrySet()) {
+            assert false;
+            if(entry.getValue() < min){
+                min = entry.getValue();
+                minKey = entry.getKey();
+            }
+        }
+        assert false;
+        closestOffice.put(minKey, mymap.get(minKey));
+
+        return closestOffice;
     }
 }
