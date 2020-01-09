@@ -41,13 +41,10 @@ public class QController {
     }
 
     @PostMapping("/")
-    public WelcomePageData requestWelcomePageData(@RequestBody CurrentPosition currentPosition){
-        qAppUser.getCurrentPosition().setLatitude(currentPosition.getLatitude());
-        qAppUser.getCurrentPosition().setLongitude(currentPosition.getLongitude());
+    public WelcomePageData requestWelcomePageData(){
         return WelcomePageData.builder()
                 .caseTypeList(officeService.getCaseTypeDisplayNameList())
                 .offices(officeService.getAllOfficeNames())
-                .closestOffice(userSerivce.getClosestOffice(userSerivce.getDistanccesToOffices(qAppUser.getCurrentPosition().getLatitude(), qAppUser.getCurrentPosition().getLongitude())))
                 .build();
     }
 
