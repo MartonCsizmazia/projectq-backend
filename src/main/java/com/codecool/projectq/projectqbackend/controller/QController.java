@@ -41,18 +41,16 @@ public class QController {
     }
 
     @PostMapping("/")
-    public WelcomePageData requestWelcomePageData(){
+    public WelcomePageData requestWelcomePageData(@RequestBody CurrentPosition currentPosition){
+        qAppUser.getCurrentPosition().setLatitude(currentPosition.getLatitude());
+        qAppUser.getCurrentPosition().setLongitude(currentPosition.getLongitude());
         return WelcomePageData.builder()
                 .caseTypeList(officeService.getCaseTypeDisplayNameList())
                 .offices(officeService.getAllOfficeNames())
                 .build();
     }
 
-    @GetMapping("/")
-    public void getCurrentPosition(@RequestBody CurrentPosition currentposition){
-        qAppUser.getCurrentPosition().setLatitude(currentposition.getLatitude());
-        qAppUser.getCurrentPosition().setLongitude(currentposition.getLongitude());
-    }
+
 
     @GetMapping("/test")
     public List<String> test(){
@@ -68,5 +66,7 @@ public class QController {
     public HashMap<String, Integer> calculateDistance(){
         return userSerivce.getDistanccesToOffices(qAppUser.getCurrentPosition().getLatitude(), qAppUser.getCurrentPosition().getLongitude());
     }
+
+    public HashMap<String, Integer>
 
 }
