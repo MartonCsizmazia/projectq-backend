@@ -65,18 +65,9 @@ public class UserSerivce {
     }
 
     public Office getClosestOffice(HashMap<String, Integer> mymap){
-        //HashMap <String, Integer> closestOffice = new HashMap<>();
 
-        Office closestOffice = null;
-        Integer max = 0;
 
-        for (Map.Entry<String, Integer> entry : mymap.entrySet()) {
-            assert false;
-            if(entry.getValue() > max){
-                max = entry.getValue();
-            }
-        }
-        Integer min = max;
+        Integer min = Integer.MAX_VALUE;
         String minKey = null;
 
         for (Map.Entry<String, Integer> entry : mymap.entrySet()) {
@@ -88,9 +79,6 @@ public class UserSerivce {
         }
         assert false;
 
-        //closestOffice.put(minKey, mymap.get(minKey));
-        officeRepository.findByName(minKey);
-
-        return closestOffice;
+        return officeRepository.findByName(minKey);
     }
 }
