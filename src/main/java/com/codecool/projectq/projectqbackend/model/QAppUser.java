@@ -40,6 +40,9 @@ public class QAppUser {
     @NotEmpty
     private String password;
 
+    @NotEmpty
+    private String email;
+
     // roles of the user (ADMIN, USER,..)
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default

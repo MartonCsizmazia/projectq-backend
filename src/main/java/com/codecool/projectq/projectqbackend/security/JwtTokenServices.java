@@ -22,8 +22,8 @@ public class JwtTokenServices {
     @Value("${security.jwt.token.secret-key:secret}")
     private String secretKey = "secret";
 
-    @Value("${security.jwt.token.expire-length:3600000}")
-    private long validityInMilliseconds = 36000000; // 10h
+    @Value("${security.jwt.token.expire-length:36000000}")
+    private long validityInMilliseconds = 360000000; // 10h
 
     private final String rolesFieldName = "roles";
 
@@ -51,16 +51,11 @@ public class JwtTokenServices {
 
     String getTokenFromRequest(HttpServletRequest req) {
         Cookie[] cookies = req.getCookies();
-        Cookie cookie = new Cookie("token", null);
         if (cookies != null) {
             for (Cookie c : cookies) {
                 if (c.getName().equals("token")) {
-                    cookie.setValue(c.getValue());
+                   return c.getValue();
                 }
-            }
-//            if (cookie.getValue().startsWith("Bearer ")) {
-            if (cookie.getValue().startsWith("Bearer")) {
-                return cookie.getValue().substring(6, cookie.getValue().length());
             }
         }
         return null;

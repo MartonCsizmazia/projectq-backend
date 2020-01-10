@@ -35,10 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                //.antMatchers("/auth/signin").permitAll() // allowed for anyone
-                //.antMatchers(HttpMethod.POST, "/").authenticated() // allowed only when signed in
-                //.antMatchers("/requestnumber").authenticated() // allowed only when signed in
-                //.anyRequest().hasRole("ADMIN")  // anything else is only for admins
+                .antMatchers("/auth/signin").permitAll() // allowed for anyone
+                .antMatchers(HttpMethod.POST, "/").authenticated() // allowed only when signed in
+                .antMatchers("/requestnumber").authenticated() // allowed only when signed in
+                .antMatchers("/registration").permitAll()// allowed only when signed in
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtTokenFilter(jwtTokenServices), UsernamePasswordAuthenticationFilter.class);

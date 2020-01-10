@@ -32,17 +32,19 @@ public class DataInitializer implements CommandLineRunner {
         createOffices();
 
         users.save(QAppUser.builder()
-            .username("user")
-            .password(passwordEncoder.encode("p"))
-            .roles(Arrays.asList("ROLE_USER"))
-            .build()
+                .username("user")
+                .password(passwordEncoder.encode("p"))
+                .email("ggg@@")
+                .roles(Arrays.asList("ROLE_USER"))
+                .build()
         );
 
         users.save(QAppUser.builder()
-            .username("admin")
-            .password(passwordEncoder.encode("p"))
-            .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
-            .build()
+                .username("admin")
+                .password(passwordEncoder.encode("p"))
+                .email("ggg@@")
+                .roles(Arrays.asList("ROLE_USER", "ROLE_ADMIN"))
+                .build()
         );
         log.debug("printing all users...");
         users.findAll().forEach(v -> log.debug(" QAppUser :" + v.toString()));
